@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tawassulan &amp; Dzikir</title>
+<meta name="description" content="Tata cara tawassulan, sholawat, syahadat, dan dzikir.">
+<meta name="color-scheme" content="dark light">
+
+<script>
+try {
+    const tema = localStorage.getItem("tema");
+    if (tema) document.documentElement.dataset.theme = tema;
+} catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Tema ---------- */
+:root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface-soft: #efede7;
+    --text: #292824;
+    --text-soft: #6d695f;
+    --accent: #766b58;
+    --border: #dedad1;
+    --shadow: rgba(0, 0, 0, .06);
+    --arabic: #24231f;
+
+    --radius: 16px;
+    --pad: 26px 24px;
+    --font-serif: Georgia, "Times New Roman", serif;
+    --font-arabic: "Amiri", "Noto Naskh Arabic", "Scheherazade New", "Times New Roman", serif;
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    --bg: #111210;
+    --surface: #1a1b18;
+    --surface-soft: #22231f;
+    --text: #eeeeea;
+    --text-soft: #aaa9a0;
+    --accent: #c4b99e;
+    --border: #30312c;
+    --shadow: rgba(0, 0, 0, .25);
+    --arabic: #f2f0e9;
+    color-scheme: dark;
+}
+
+/* ---------- Dasar ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.8 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    transition: background .3s ease, color .3s ease;
+}
+
+main {
+    width: min(720px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 48px 0 72px;
+}
+
+/* ---------- Header ---------- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.views {
+    color: var(--text-soft);
+    font-size: 13px;
+}
+
+.views strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.theme-toggle {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: border-color .2s ease;
+}
+
+.theme-toggle:hover { border-color: var(--accent); }
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ---------- Judul halaman & bagian ---------- */
+.hero {
+    text-align: center;
+    margin-bottom: 52px;
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 6vw, 44px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -.5px;
+}
+
+.hero p {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 14px;
+}
+
+.section { margin-bottom: 44px; }
+
+.section h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    font-family: var(--font-serif);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.section h2::before {
+    content: "";
+    width: 4px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+/* ---------- Kartu ---------- */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--pad);
+    box-shadow: 0 6px 24px var(--shadow);
+}
+
+/* ---------- Teks Arab & Latin ---------- */
+.arabic {
+    margin: 0;
+    color: var(--arabic);
+    font-family: var(--font-arabic);
+    font-size: clamp(26px, 6vw, 34px);
+    line-height: 2.1;
+    text-align: center;
+}
+
+.arabic--long {
+    font-size: clamp(22px, 5vw, 28px);
+    line-height: 2;
+}
+
+.latin {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 15px;
+    line-height: 1.9;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+.arabic + .latin { margin-top: 14px; }
+
+.pair + .pair {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+/* ---------- Tawassul ---------- */
+.tawasul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.tawasul .card { padding: 20px 22px; }
+
+.tawasul p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.isi {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.isi--baris {
+    display: block;
+    margin-top: 4px;
+}
+
+.baca {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- Niat ---------- */
+.niat {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-soft);
+}
+
+.niat p { margin: 0; }
+
+/* ---------- Dzikir ---------- */
+.dzikir .latin { font-size: 16px; line-height: 2; }
+
+.catatan {
+    margin: 22px 0 0;
+    padding: 12px 16px;
+    background: var(--surface-soft);
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 600px) {
+    :root { --pad: 20px 16px; }
+
+    main { padding-top: 36px; }
+    .header-inner { padding: 10px 15px; }
+    .hero { margin-bottom: 40px; }
+    .section { margin-bottom: 36px; }
+    .section h2 { font-size: 21px; }
+
+    .tawasul .card { padding: 17px 16px; }
+    .tawasul p, .latin { font-size: 14px; }
+    .niat { font-size: 15px; }
+    .dzikir .latin { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <span class="views">Dilihat <strong id="viewCount">–</strong> kali</span>
+        <button class="theme-toggle" id="themeToggle" type="button">Mode Terang</button>
+    </div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <h1>Tawassulan &amp; Dzikir</h1>
+        <p>Bacaan tawassul, sholawat, syahadat, dan dzikir</p>
+    </section>
+
+    <section class="section">
+        <h2>Ta'awudz &amp; Bismillah</h2>
+        <div class="card">
+            <div class="pair">
+                <p class="arabic" lang="ar" dir="rtl">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</p>
+                <p class="latin">A'udzu billaahi minasy-syaithaanir-rajiim.</p>
+            </div>
+            <div class="pair">
+                <p class="arabic" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+                <p class="latin">Bismillaahir-rahmaanir-rahiim.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Tawasulan</h2>
+        <ol class="tawasul">
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada Nabi Adam, Ibu Siti Hawa, Nabi Sulaiman, Nabi Syits, Nabi Khidir, Nabi Muhammad shallallahu 'alaihi wa sallam, serta seluruh para nabi dan rasul Allah yang lainnya.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada seluruh sahabat dan keluarga Nabi Muhammad shallallahu 'alaihi wa sallam.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada Syekh Subakir, Syekh Siti Jenar, Sunan Kalijaga, para Wali Songo, serta seluruh wali Allah yang lainnya.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada seluruh guru hamba, dari awal hingga akhir.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada seluruh para malaikat Allah.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada seluruh leluhur hamba, dari awal hingga akhir.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada kedua orang tua hamba, kakak, dan adik hamba.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah untuk badan jasmani dan ruhani hamba <strong class="isi">(sebut nama lengkap kamu)</strong>.</p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+            <li class="card">
+                <p>Allahumma, hamba menghadiahkan Al-Fatihah kepada <strong class="isi isi--baris">(sebut nama seseorang yang ingin kamu hadiahkan).</strong></p>
+                <div class="baca">Baca Al-Fatihah</div>
+            </li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2>Sholawat Ibrahimiyah</h2>
+        <div class="card">
+            <p class="arabic arabic--long" lang="ar" dir="rtl">اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ، وَعَلَىٰ آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَىٰ سَيِّدِنَا إِبْرَاهِيمَ، وَعَلَىٰ آلِ سَيِّدِنَا إِبْرَاهِيمَ، وَبَارِكْ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ، وَعَلَىٰ آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَىٰ سَيِّدِنَا إِبْرَاهِيمَ، وَعَلَىٰ آلِ سَيِّدِنَا إِبْرَاهِيمَ، فِي الْعَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+            <p class="latin">Allahumma shalli 'alaa sayyidinaa Muhammad, wa 'alaa aali sayyidinaa Muhammad, kamaa shallaita 'alaa sayyidinaa Ibraahiim, wa 'alaa aali sayyidinaa Ibraahiim, wa baarik 'alaa sayyidinaa Muhammad, wa 'alaa aali sayyidinaa Muhammad, kamaa baarakta 'alaa sayyidinaa Ibraahiim, wa 'alaa aali sayyidinaa Ibraahiim, fil-'aalamiina innaka hamiidun majiid.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Syahadat</h2>
+        <div class="card">
+            <p class="arabic" lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</p>
+            <p class="latin">Asyhadu an laa ilaaha illallaahu, wa asyhadu anna Muhammadar rasuulullaah.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Membaca Niat</h2>
+        <div class="card niat">
+            <p>Allahumma,</p>
+            <p>engkaulah yang hamba tuju, ridho-Mu lah yang hamba minta.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Dzikir</h2>
+        <div class="card dzikir">
+            <p class="arabic" lang="ar" dir="rtl">سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلٰهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ</p>
+            <p class="latin">Subhanallah, walhamdulillah, wa laa ilaaha illallah, wallahu akbar, laa haula wa laa quwwata illaa billaahil 'aliyyil 'azhiim.</p>
+            <p class="catatan">Dibaca seikhlasnya dan semampunya.</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+    root.dataset.theme = theme;
+    toggle.textContent = theme === "dark" ? "Mode Terang" : "Mode Gelap";
+}
+
+toggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem("tema", next); } catch (e) {}
+});
+
+applyTheme(root.dataset.theme);
+
+/* ---------- Penghitung Views ---------- */
+const WORKER_URL = "https://GANTI-DENGAN-URL-WORKER-KAMU.workers.dev";
+const viewCount = document.getElementById("viewCount");
+
+fetch(WORKER_URL, { method: "POST" })
+    .then((res) => res.json())
+    .then((data) => { viewCount.textContent = data.total.toLocaleString("id-ID"); })
+    .catch(() => { /* gagal memuat: tetap tampil "–" */ });
+</script>
+
+</body>
+</html>
